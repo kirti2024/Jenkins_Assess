@@ -11,7 +11,7 @@ pipeline{
 			stage('build image'){
 				steps{
 					script{
-						sh 'docker buildx build assesimage2:13 . '
+						sh 'docker buildx build -t assesimage2:13 . '
 																
 }
 }
