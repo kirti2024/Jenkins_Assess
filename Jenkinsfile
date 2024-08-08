@@ -12,9 +12,6 @@ pipeline{
 				steps{
 					script{
 						sh 'docker build -t assesimage2:13 . '
-						
-						
-						
 																
 }
 }
