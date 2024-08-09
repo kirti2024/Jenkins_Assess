@@ -21,11 +21,12 @@ pipeline{
 			stage ('push image'){
 			 steps{
 			 	script{
-				withDockerRegistry(credentialsId: 'dtoken', url: 'https://hub.docker.com/') {
-					 
-					sh 'docker push kirti2024/assessmentpurpose:13'
-    
-}
+				 withCredentials([string(credentialsId: 'dtoken', variable: 'DOCKER_PASSWORD')]) {
+                sh """
+                echo "$DOCKER_PASSWORD" | docker login -u kirti2024 --password-stdin https://index.docker.io/v1/
+                docker push kirti2024/assessmentpurpose:13
+                """
+            }
 
  
 			 }
