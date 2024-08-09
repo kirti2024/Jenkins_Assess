@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	environment{
-	DOCKER_PASSWORD=credentials('dtoken')
+	DOCKER_PASSWORD='dtoken'
 }
 		stages{
 			stage('Checkout'){
@@ -21,14 +21,14 @@ pipeline{
 }
 }
 }
-			stage ('push image'){
-			 steps{
-			 	script{
-				 withCredentials([string(credentialsId: 'dtoken', variable: 'DOCKER_PASSWORD')]) {
-                sh """
-                echo "$DOCKER_PASSWORD" | docker login -u kirti2024 --password-stdin https://index.docker.io/v1/
-                docker push kirti2024/assessmentpurpose:13
-                """
+	stage ('push image'){
+		steps{
+			 script{
+				 withCredentials([usernamePassword(credentialsId: "${DOCKER_PASSWORD}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh """
+                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                        docker push kirti2024/assessmentpurpose:13
+                        """
             }
 
  
