@@ -11,7 +11,8 @@ pipeline{
 			stage('build image'){
 				steps{
 					script{
-						sh 'docker buildx build --tag assesimage2:13 .'
+						sh 'docker buildx build assesimage2:13 .'
+						sh 'docker tag assesimage2:13 kirti2024/assessmentpurpose:13'
 																
 }
 }
@@ -20,7 +21,7 @@ pipeline{
 			 steps{
 			 	script{
 				 withDockerRegistry(credentialsId: 'dtoken', url: 'https://hub.docker.com/repository/docker/kirti2024/assessmentpurpose/') {
-					 sh 'docker tag assesimage2:13 kirti2024/assessmentpurpose:13'
+					 
 					 sh 'docker push kirti2024/assessmentpurpose:13'
     
 }
