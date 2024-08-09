@@ -20,7 +20,7 @@ pipeline{
 			stage ('push image'){
 			 steps{
 			 	script{
-				 withDockerRegistry(credentialsId: 'dtoken', url: 'https://hub.docker.com/repository/docker/kirti2024/assessmentpurpose/') {
+				 withDockerRegistry(credentialsId: 'dtoken', url: 'https://hub.docker.com/repository/docker/') {
 					 
 					 sh 'docker push kirti2024/assessmentpurpose:13'
     
