@@ -1,5 +1,8 @@
 pipeline{
 	agent any
+	environment{
+	DOCKER_PASSWORD=credentials('dtoken')
+}
 		stages{
 			stage('Checkout'){
 				steps{
