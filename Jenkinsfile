@@ -13,6 +13,7 @@ pipeline{
 					script{
 						sh 'docker buildx build -t assesimage2:13 .'
 						sh 'docker tag assesimage2:13 kirti2024/assessmentpurpose:13'
+						
 																
 }
 }
@@ -20,13 +21,15 @@ pipeline{
 			stage ('push image'){
 			 steps{
 			 	script{
-				 withDockerRegistry(credentialsId: 'dtoken', url: 'https://hub.docker.com/') {
+				withDockerRegistry(credentialsId: 'dtoken', url: 'https://hub.docker.com/') {
 					 
-					 sh 'docker push kirti2024/assessmentpurpose:13'
+					sh 'docker push kirti2024/assessmentpurpose:13'
     
 }
-				}
+
+ 
 			 }
 			}
+}
 }
 }
