@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: jenkins/jenkins:lts
+        image: kirti2024/assessmentpurpose:15
         ports:
         - containerPort: 8080
         - containerPort: 50000
