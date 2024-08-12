@@ -15,6 +15,7 @@ pipeline{
 				steps{
 					script{
 						sh 'docker buildx build -t assesimage2:15 .'
+						
 						sh 'docker tag assesimage2:15 kirti2024/assessmentpurpose:15'
 						
 																
@@ -27,7 +28,7 @@ pipeline{
 				 withCredentials([usernamePassword(credentialsId: "${DOCKER_PASSWORD}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh """
                         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-                        docker push kirti2024/assessmentpurpose:13
+                        docker push kirti2024/assessmentpurpose:15
                         """
             }
 
