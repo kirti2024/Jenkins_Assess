@@ -43,8 +43,8 @@ pipeline{
 stage('Deploy to K8s'){
               steps{
 		script{ 
-			withKubeCredentials([credentialsId : 'kubesecret', serverUrl:'https://6DB421C38B80BEBC06436AF66D5A35B9.gr7.us-east-1.eks.amazonaws.com']){
-         sh """ kubectl apply -f  deployment.yaml"""
+			withKubeConfig(caCertificate: '', clusterName: 'AssessCluster', contextName: '', credentialsId: 'kubesecret', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://6DB421C38B80BEBC06436AF66D5A35B9.gr7.us-east-1.eks.amazonaws.com') {
+    sh """ kubectl apply -f  deployment.yaml"""
 }
 		
 }
