@@ -42,9 +42,8 @@ pipeline{
 stage('Deploy to K8s'){
               steps{
 		script{ 
-		withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awscred', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-    sh """aws eks update-kubeconfig --region us-east-1 --name AssessCluster"""
-			sh """ kubectl apply -f  deployment.yaml """
+		withKubeConfig([credentialsId: 'kubesecret', serverUrl: 'https://6DB421C38B80BEBC06436AF66D5A35B9.gr7.us-east-1.eks.amazonaws.com']) {
+         sh """ kubectl apply -f  deployment.yaml"""
 }
 }
 }
