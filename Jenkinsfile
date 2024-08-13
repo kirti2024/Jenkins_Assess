@@ -46,12 +46,10 @@ KUBECONFIG_FILE = "/tmp/kubeconfig"
 stage('Deploy to K8s'){
               steps{
 		script{ 
-		withAWS(credentials:AWS_CRED, region: 'us-east-1'){
-sh """aws eks update-kubeconfig --name AssessCluster --kubeconfig $KUBECONFIG_FILE  """
+			withKubeCredentials([credentialsId : 'kubesecret', serverUrl:'https://6DB421C38B80BEBC06436AF66D5A35B9.gr7.us-east-1.eks.amazonaws.com']){
+sh """ kubectl apply -f  deployment.yaml"""
 }
-withENV(["KUBECONFIG=${KUBECONFIG_FILE}"]){
- sh """ kubectl apply -f  deployment.yaml """
-}
+		
 }
 }
 	      }
