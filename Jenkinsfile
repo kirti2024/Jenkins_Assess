@@ -2,6 +2,10 @@ pipeline{
 	agent any
 	environment{
 	DOCKER_PASSWORD="dtoken"
+		AWS_CRED = "awscred"
+KUBECONFIG_FILE = "/tmp/kubeconfig"
+
+		
 }
 		stages{
 			stage('Checkout'){
@@ -42,8 +46,11 @@ pipeline{
 stage('Deploy to K8s'){
               steps{
 		script{ 
-		withKubeConfig([credentialsId: 'kubesecret', serverUrl: 'https://6DB421C38B80BEBC06436AF66D5A35B9.gr7.us-east-1.eks.amazonaws.com']) {
-         sh """ kubectl apply -f  deployment.yaml"""
+		withAWS(credentials:AWS_CRED, region: 'us-east-1'){
+sh """aws eks update-kubeconfig --name AssessCluster --kubeconfig $KUBECONFIG_FILE  """
+}
+withENV(["KUBECONFIG=${KUBECONFIG_FILE}"]){
+ sh """ kubectl apply -f  deployment.yaml """
 }
 }
 }
