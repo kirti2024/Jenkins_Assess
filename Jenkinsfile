@@ -2,9 +2,6 @@ pipeline{
 	agent any
 	environment{
 	DOCKER_PASSWORD="dtoken"
-		AWS_CRED = "awscred"
-KUBECONFIG_FILE = "/tmp/kubeconfig"
-
 		
 }
 		stages{
