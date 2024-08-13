@@ -42,8 +42,10 @@ pipeline{
 stage('Deploy to K8s'){
               steps{
 		script{ 
-		sh """aws eks update-kubeconfig --region us-east-1 --name AssessCluster"""
+		withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awscred', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+    sh """aws eks update-kubeconfig --region us-east-1 --name AssessCluster"""
 			sh """ kubectl apply -f  deployment.yaml """
+}
 }
 }
 	      }
