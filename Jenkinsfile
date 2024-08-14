@@ -43,7 +43,7 @@ pipeline{
 stage('Deploy to K8s'){
               steps{
 		script{ 
-			sh """ kubectl apply -f jenkins.yaml --validate=false """
+			sh """ kubectl apply -f jenkins.yaml """
 
 			}
 		}
