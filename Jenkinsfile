@@ -43,13 +43,10 @@ pipeline{
 stage('Deploy to K8s'){
               steps{
 		script{ 
-			Container('kubectl'){
-		sh """ kubectl apply -f jenkins.yaml """
+			sh """ kubectl apply -f jenkins.yaml """
 
 			}
-		
-}
-}
+		}
 	      }
 
 			
